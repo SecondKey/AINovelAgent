@@ -1,0 +1,23 @@
+<local:DockableContentBase x:Class="AINovelAgent.Views.Dockables.QuickPanelView"
+			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:local="clr-namespace:AINovelAgent.Base"
+			 xmlns:dockPanels="clr-namespace:AINovelAgent.Views.Dockables.Panels"
+			 mc:Ignorable="d"
+			 Title="快捷" ContentId="Tool.Quick">
+	<Grid>
+		<TabControl>
+			<TabItem Header="目录">
+				<dockPanels:ProjectNavigationPanel />
+			</TabItem>
+			<TabItem Header="工具">
+				<dockPanels:QuickToolsPanel />
+			</TabItem>
+			<TabItem Header="工作区">
+				<dockPanels:WorkspaceSwitchPanel />
+			</TabItem>
+		</TabControl>
+	</Grid>
+</local:DockableContentBase>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LayoutRoot xmlns="http://schemas.xceed.com/wpf/xaml/avalondock/layout">
+	<RootPanel Orientation="Horizontal">
+		<LayoutAnchorablePane DockWidth="300">
+			<LayoutAnchorable Title="快捷" ContentId="Tool.Quick" />
+		</LayoutAnchorablePane>
+		<LayoutDocumentPane>
+			<LayoutDocument Title="编辑器" ContentId="Document.Editor" />
+		</LayoutDocumentPane>
+		<LayoutAnchorablePane DockWidth="340">
+			<LayoutAnchorable Title="AI 聊天" ContentId="Tool.AIChat" />
+		</LayoutAnchorablePane>
+	</RootPanel>
+</LayoutRoot>

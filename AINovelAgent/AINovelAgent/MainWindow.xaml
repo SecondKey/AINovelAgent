@@ -1,0 +1,66 @@
+﻿<Window x:Class="AINovelAgent.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AINovelAgent"
+        xmlns:ad="clr-namespace:AvalonDock;assembly=AvalonDock"
+        xmlns:adLayout="clr-namespace:AvalonDock.Layout;assembly=AvalonDock"
+        xmlns:adControls="clr-namespace:AvalonDock.Controls;assembly=AvalonDock"
+        xmlns:controls="clr-namespace:AINovelAgent.Views.Controls"
+        xmlns:dockviews="clr-namespace:AINovelAgent.Views.Dockables"
+        mc:Ignorable="d"
+        Title="AINovelAgent" Height="600" Width="1000">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- 顶部菜单栏（拆分控件） -->
+        <controls:MainMenu Grid.Row="0" />
+
+        <!-- 中央可停靠区域（AvalonDock） -->
+        <ad:DockingManager Grid.Row="1" x:Name="DockManager">
+            <ad:DockingManager.LayoutItemContainerStyle>
+                <Style TargetType="adControls:LayoutItem">
+                    <Setter Property="CloseCommand" Value="{x:Static ApplicationCommands.Close}" />
+                </Style>
+            </ad:DockingManager.LayoutItemContainerStyle>
+
+            <ad:DockingManager.Layout>
+                <adLayout:LayoutRoot>
+                    <adLayout:LayoutPanel Orientation="Horizontal">
+                        <!-- 左侧侧边栏（快捷/目录/工作区切换） -->
+                        <adLayout:LayoutAnchorablePane DockWidth="300">
+                            <adLayout:LayoutAnchorable Title="侧边栏" ContentId="Tool.Quick" CanClose="False" CanHide="True">
+                                <dockviews:QuickPanelView />
+                            </adLayout:LayoutAnchorable>
+                        </adLayout:LayoutAnchorablePane>
+
+                        <!-- 中心文档区 -->
+                        <adLayout:LayoutDocumentPane>
+                            <adLayout:LayoutDocument Title="欢迎" ContentId="Document.Welcome">
+                                <dockviews:WelcomePageView />
+                            </adLayout:LayoutDocument>
+                            <adLayout:LayoutDocument Title="编辑器" ContentId="Document.Editor">
+                                <dockviews:MainEditorView />
+                            </adLayout:LayoutDocument>
+                        </adLayout:LayoutDocumentPane>
+
+                        <!-- 右侧 AI 聊天窗口区 -->
+                        <adLayout:LayoutAnchorablePane DockWidth="340">
+                            <adLayout:LayoutAnchorable Title="AI 聊天" ContentId="Tool.AIChat" CanClose="False" CanHide="True">
+                                <dockviews:AIChatView />
+                            </adLayout:LayoutAnchorable>
+                        </adLayout:LayoutAnchorablePane>
+                    </adLayout:LayoutPanel>
+                </adLayout:LayoutRoot>
+            </ad:DockingManager.Layout>
+        </ad:DockingManager>
+
+        <!-- 底部状态栏（拆分控件） -->
+        <controls:MainStatusBar Grid.Row="2" />
+    </Grid>
+</Window>
