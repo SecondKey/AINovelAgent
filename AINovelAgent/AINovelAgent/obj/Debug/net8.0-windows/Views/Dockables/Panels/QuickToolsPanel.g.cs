@@ -22,6 +22,7 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Controls.Ribbon;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms.Integration;
 using System.Windows.Ink;
 using System.Windows.Input;
 using System.Windows.Markup;
@@ -56,7 +57,7 @@ namespace AINovelAgent.Views.Dockables.Panels {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/AINovelAgent;component/views/dockables/panels/quicktoolspanel.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/AINovelAgent;V1.0.0.0;component/views/dockables/panels/quicktoolspanel.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\..\..\Views\Dockables\Panels\QuickToolsPanel.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

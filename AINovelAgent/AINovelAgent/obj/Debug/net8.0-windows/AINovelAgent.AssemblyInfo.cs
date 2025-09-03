@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AINovelAgent")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0d201aaa7484ff46f38fbf1c4fa9e39d3d5058c6")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a47bae2477e290b7b91f9d6aa41ab44311a24f93")]
 [assembly: System.Reflection.AssemblyProductAttribute("AINovelAgent")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AINovelAgent")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

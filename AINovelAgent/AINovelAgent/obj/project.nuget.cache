@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "2hn/e+26x6Y=",
+  "dgSpecHash": "126orgNtMJY=",
   "success": true,
   "projectFilePath": "D:\\AINovelAgent\\AINovelAgent\\AINovelAgent\\AINovelAgent.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Administrator\\.nuget\\packages\\avalonedit\\6.3.1.120\\avalonedit.6.3.1.120.nupkg.sha512",
     "C:\\Users\\Administrator\\.nuget\\packages\\communitytoolkit.mvvm\\8.4.0\\communitytoolkit.mvvm.8.4.0.nupkg.sha512",
     "C:\\Users\\Administrator\\.nuget\\packages\\dirkster.avalondock\\4.72.1\\dirkster.avalondock.4.72.1.nupkg.sha512",
     "C:\\Users\\Administrator\\.nuget\\packages\\dirkster.avalondock.themes.vs2013\\4.72.1\\dirkster.avalondock.themes.vs2013.4.72.1.nupkg.sha512",
