@@ -1,0 +1,207 @@
+<Window x:Class="AINovelAgent.Views.Windows.CreateProjectWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:hc="https://handyorg.github.io/handycontrol"
+        mc:Ignorable="d"
+        Title="新建小说工程" 
+        Height="600" 
+        Width="500"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize"
+        Background="White">
+    
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- 标题 -->
+        <TextBlock Grid.Row="0" 
+                   Text="创建新的小说工程" 
+                   FontSize="18" 
+                   FontWeight="Bold" 
+                   Margin="0,0,0,20"
+                   HorizontalAlignment="Center"
+                   Foreground="{DynamicResource PrimaryTextBrush}"/>
+
+        <!-- 表单内容 -->
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+                
+                <!-- 项目路径 -->
+                <GroupBox Header="项目位置" Margin="0,0,0,15">
+                    <StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox Grid.Column="0" 
+                                     Text="{Binding ProjectPath, UpdateSourceTrigger=PropertyChanged}"
+                                     IsReadOnly="True"
+                                     
+                                     hc:InfoElement.Placeholder="选择项目存放路径"/>
+                            <Button Grid.Column="1" 
+                                    Content="浏览..." 
+                                    Width="80" 
+                                    Margin="10,0,0,0"
+                                    Command="{Binding BrowseProjectPathCommand}"
+                                    Background="#007ACC" Foreground="White"/>
+                        </Grid>
+                        <TextBlock Text="{Binding ProjectFullPath}" 
+                                   FontSize="11" 
+                                   Foreground="{DynamicResource ThirdlyTextBrush}"
+                                   TextWrapping="Wrap"
+                                   Margin="0,10,0,0"/>
+                    </StackPanel>
+                </GroupBox>
+
+                <!-- 基本信息 -->
+                <GroupBox Header="基本信息" Margin="0,0,0,15">
+                    <StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="80"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="项目名称" VerticalAlignment="Center"/>
+                            <TextBox Grid.Column="1" 
+                                     Text="{Binding ProjectName, UpdateSourceTrigger=PropertyChanged}"
+                                     
+                                     hc:InfoElement.Placeholder="项目文件夹名称"/>
+                        </Grid>
+                        
+                        <!-- 移除小说标题字段 -->
+                        
+                        <Grid Margin="0,12,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="80"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="作者名称" VerticalAlignment="Center"/>
+                            <TextBox Grid.Column="1" 
+                                     Text="{Binding AuthorName, UpdateSourceTrigger=PropertyChanged}"
+                                     
+                                     hc:InfoElement.Placeholder="作者姓名"/>
+                        </Grid>
+                        
+                        <Grid Margin="0,12,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="80"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="项目类型" VerticalAlignment="Center"/>
+                            <ComboBox Grid.Column="1" 
+                                      SelectedItem="{Binding ProjectGenre}"
+                                      >
+                                <ComboBoxItem Content="通用项目"/>
+                                <ComboBoxItem Content="小说创作"/>
+                                <ComboBoxItem Content="剧本创作"/>
+                                <ComboBoxItem Content="游戏文案"/>
+                                <ComboBoxItem Content="其他"/>
+                            </ComboBox>
+                        </Grid>
+                    </StackPanel>
+                </GroupBox>
+
+                <!-- 写作设置 -->
+                <GroupBox Header="写作设置" Margin="0,0,0,15">
+                    <StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="80"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="80"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="目标字数" VerticalAlignment="Center"/>
+                            <hc:NumericUpDown Grid.Column="1" 
+                                              Value="{Binding TargetWordCount}"
+                                              Minimum="1000"
+                                              Maximum="10000000"
+                                              Increment="10000"
+                                              />
+                            <TextBlock Grid.Column="2" Text="预计章节" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                            <hc:NumericUpDown Grid.Column="3" 
+                                              Value="{Binding ChapterCount}"
+                                              Minimum="1"
+                                              Maximum="1000"
+                                              Increment="1"
+                                              />
+                        </Grid>
+                        
+                        <Grid Margin="0,12,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="80"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="80"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="写作风格" VerticalAlignment="Center"/>
+                            <ComboBox Grid.Column="1" 
+                                      SelectedItem="{Binding WritingStyle}"
+                                      >
+                                <ComboBoxItem Content="王道热血"/>
+                                <ComboBoxItem Content="细腻温情"/>
+                                <ComboBoxItem Content="幽默轻松"/>
+                                <ComboBoxItem Content="悬疑紧张"/>
+                                <ComboBoxItem Content="史诗宏大"/>
+                                <ComboBoxItem Content="日常治愈"/>
+                                <ComboBoxItem Content="其他"/>
+                            </ComboBox>
+                            <TextBlock Grid.Column="2" Text="叙述视角" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                            <ComboBox Grid.Column="3" 
+                                      SelectedItem="{Binding NarrativePerspective}"
+                                      >
+                                <ComboBoxItem Content="第一人称"/>
+                                <ComboBoxItem Content="第三人称"/>
+                                <ComboBoxItem Content="第三人称全知"/>
+                                <ComboBoxItem Content="多视角"/>
+                            </ComboBox>
+                        </Grid>
+                    </StackPanel>
+                </GroupBox>
+
+                <!-- 项目描述 -->
+                <GroupBox Header="项目描述" Margin="0,0,0,15">
+                    <TextBox Text="{Binding ProjectDescription, UpdateSourceTrigger=PropertyChanged}"
+                             
+                             AcceptsReturn="True"
+                             TextWrapping="Wrap"
+                             Height="80"
+                             VerticalScrollBarVisibility="Auto"
+                             hc:InfoElement.Placeholder="简要描述这个小说项目..."/>
+                </GroupBox>
+
+            </StackPanel>
+        </ScrollViewer>
+
+        <!-- 按钮区域 -->
+        <Grid Grid.Row="2" Margin="0,20,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            
+            <Button Grid.Column="1" 
+                    Content="创建项目" 
+                    Width="100" 
+                    Height="35"
+                    Margin="0,0,10,0"
+                    Command="{Binding CreateProjectCommand}"
+                    Style="{StaticResource ButtonPrimary}"/>
+            
+            <Button Grid.Column="2" 
+                    Content="取消" 
+                    Width="80" 
+                    Height="35"
+                    Command="{Binding CancelCommand}"
+                    Background="#E0E0E0" Foreground="Black"/>
+        </Grid>
+    </Grid>
+</Window>

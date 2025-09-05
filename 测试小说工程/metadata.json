@@ -1,0 +1,16 @@
+{
+  "title": "测试小说工程",
+  "author": "测试作者",
+  "genre": "奇幻冒险",
+  "status": "创作中",
+  "createdDate": "2024-01-01",
+  "lastModified": "2024-01-01",
+  "version": "1.0.0",
+  "wordCount": 0,
+  "chapterCount": 4,
+  "targetWordCount": 100000,
+  "description": "这是一个测试小说工程，用于验证文件结构设计",
+  "tags": ["测试", "奇幻", "冒险"],
+  "language": "zh-CN",
+  "encoding": "UTF-8"
+}

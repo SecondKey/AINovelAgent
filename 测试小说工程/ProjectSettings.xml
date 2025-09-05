@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ProjectSettings>
+    <BasicInfo>
+        <Title>测试小说工程</Title>
+        <Author>测试作者</Author>
+        <Genre>奇幻冒险</Genre>
+        <Status>创作中</Status>
+        <CreatedDate>2024-01-01</CreatedDate>
+        <LastModified>2024-01-01</LastModified>
+        <Version>1.0.0</Version>
+    </BasicInfo>
+    <WritingSettings>
+        <TargetWordCount>100000</TargetWordCount>
+        <ChapterCount>20</ChapterCount>
+        <WordsPerChapter>5000</WordsPerChapter>
+        <WritingStyle>王道热血</WritingStyle>
+        <NarrativePerspective>第三人称</NarrativePerspective>
+        <Tone>积极向上</Tone>
+    </WritingSettings>
+    <AISettings>
+        <ModelName>llama3.1</ModelName>
+        <Temperature>0.7</Temperature>
+        <MaxTokens>2000</MaxTokens>
+        <EnableRealTimeCorrection>true</EnableRealTimeCorrection>
+        <EnableStyleConsistency>true</EnableStyleConsistency>
+    </AISettings>
+    <ExportSettings>
+        <DefaultFormat>PDF</DefaultFormat>
+        <IncludeImages>true</IncludeImages>
+        <IncludeMetadata>true</IncludeMetadata>
+        <AutoBackup>true</AutoBackup>
+    </ExportSettings>
+</ProjectSettings>

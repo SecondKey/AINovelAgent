@@ -1,67 +1,105 @@
-using System;
-using System.Linq;
-using System.Windows.Controls;
-using System.Windows.Input;
 using AINovelAgent.Base;
+using AINovelAgent.ViewModels;
+using Microsoft.Extensions.DependencyInjection;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Documents;
 
 namespace AINovelAgent.Views.Dockables
 {
+    /// <summary>
+    /// MainEditorView.xaml 的交互逻辑
+    /// </summary>
 	public partial class MainEditorView : DockableContentBase
 	{
+        private MainEditorViewModel? _viewModel;
+
 		public MainEditorView()
 		{
 			InitializeComponent();
+            Loaded += OnLoaded;
+        }
+
+        public MainEditorView(IServiceProvider serviceProvider) : this()
+        {
+            // 通过DI获取ViewModel
+            _viewModel = serviceProvider.GetRequiredService<MainEditorViewModel>();
+            DataContext = _viewModel;
+        }
+
+        private void OnLoaded(object sender, RoutedEventArgs e)
+        {
+            // 如果还没有设置ViewModel，尝试从DataContext获取
+            if (_viewModel == null)
+            {
+                _viewModel = DataContext as MainEditorViewModel;
+            }
+
+            // 设置Document属性
+            if (_viewModel != null)
+            {
+                EditorBox.Document = _viewModel.Document;
+            }
 		}
 
 		private void EditorBox_TextChanged(object sender, TextChangedEventArgs e)
 		{
-			UpdateStatus();
+            // 同步Document到ViewModel
+            if (_viewModel != null && EditorBox.Document != _viewModel.Document)
+            {
+                _viewModel.Document = EditorBox.Document;
+            }
+            _viewModel?.UpdateStatusCommand.Execute(null);
 		}
 
-		private void EditorBox_SelectionChanged(object sender, System.Windows.RoutedEventArgs e)
+		private void EditorBox_SelectionChanged(object sender, RoutedEventArgs e)
 		{
-			UpdateStatus();
-		}
+            _viewModel?.UpdateStatusCommand.Execute(null);
+        }
 
-		private void EditorBox_PreviewKeyDown(object sender, KeyEventArgs e)
+        private void FontFamilyComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (_viewModel != null && e.AddedItems.Count > 0)
+            {
+                _viewModel.SelectedFontFamily = e.AddedItems[0].ToString() ?? "Microsoft YaHei";
+                _viewModel.ApplyFontFamilyCommand.Execute(null);
+            }
+        }
+
+        private void FontSizeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (_viewModel != null && e.AddedItems.Count > 0)
+            {
+                if (double.TryParse(e.AddedItems[0].ToString(), out double fontSize))
+                {
+                    _viewModel.SelectedFontSize = fontSize;
+                    _viewModel.ApplyFontSizeCommand.Execute(null);
+                }
+            }
+        }
+
+		private void LineSpacingComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
-			if (e.Key == Key.Tab)
+            if (_viewModel != null && e.AddedItems.Count > 0)
 			{
-				// 插入制表符，阻止焦点跳转
-				var box = EditorBox;
-				int caret = box.CaretIndex;
-				box.Text = box.Text.Insert(caret, "\t");
-				box.CaretIndex = caret + 1;
-				e.Handled = true;
-			}
-		}
-
-		private void UpdateStatus()
-		{
-			if (EditorBox == null) return;
-			var text = EditorBox.Text ?? string.Empty;
-			var caretIndex = EditorBox.CaretIndex;
-			// 计算行列
-			var lines = text.Split(new[] { "\r\n", "\n" }, StringSplitOptions.None);
-			int currentLine = 1;
-			int column = 1;
-			int count = 0;
-			for (int i = 0; i < lines.Length; i++)
-			{
-				var lineLen = lines[i].Length + (i < lines.Length - 1 ? 1 : 0); // 近似处理换行
-				if (count + lineLen >= caretIndex)
+                if (double.TryParse(e.AddedItems[0].ToString(), out double lineSpacing))
 				{
-					currentLine = i + 1;
-					column = Math.Max(1, caretIndex - count + 1);
-					break;
+                    _viewModel.SelectedLineSpacing = lineSpacing;
+                    _viewModel.ApplyLineSpacingCommand.Execute(null);
 				}
-				count += lineLen;
-			}
-			var charCount = text.Length;
-			if (EditorStatusTextBlock != null)
-			{
-				EditorStatusTextBlock.Text = $"行 {currentLine}, 列 {column}    字数 {charCount}";
 			}
 		}
-	}
+
+		private void CharacterSpacingComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		{
+            if (_viewModel != null && e.AddedItems.Count > 0)
+            {
+                if (double.TryParse(e.AddedItems[0].ToString(), out double characterSpacing))
+                {
+                    _viewModel.SelectedCharacterSpacing = characterSpacing;
+                    _viewModel.ApplyCharacterSpacingCommand.Execute(null);
+                }
+            }
+        }
+    }
 }

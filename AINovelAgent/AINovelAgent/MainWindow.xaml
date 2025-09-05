@@ -10,7 +10,7 @@
         xmlns:controls="clr-namespace:AINovelAgent.Views.Controls"
         xmlns:dockviews="clr-namespace:AINovelAgent.Views.Dockables"
         mc:Ignorable="d"
-        Title="AINovelAgent" Height="600" Width="1000">
+        Title="{Binding WindowTitle}" Height="600" Width="1000">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -22,7 +22,9 @@
         <controls:MainMenu Grid.Row="0" />
 
         <!-- 中央可停靠区域（AvalonDock） -->
-        <ad:DockingManager Grid.Row="1" x:Name="DockManager">
+        <ad:DockingManager Grid.Row="1" x:Name="DockManager"
+                           Background="{DynamicResource RegionBrush}"
+                           BorderBrush="{DynamicResource BorderBrush}">
             <ad:DockingManager.LayoutItemContainerStyle>
                 <Style TargetType="adControls:LayoutItem">
                     <Setter Property="CloseCommand" Value="{x:Static ApplicationCommands.Close}" />

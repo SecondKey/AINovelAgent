@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Settings>
+    <Title>世界观设定</Title>
+    <Description>测试小说的世界观设定</Description>
+    <World>
+        <Name>测试世界</Name>
+        <Type>奇幻世界</Type>
+        <Description>一个充满魔法和冒险的奇幻世界</Description>
+        <MagicSystem>
+            <Name>元素魔法</Name>
+            <Description>基于四大元素的魔法系统</Description>
+            <Elements>火, 水, 土, 风</Elements>
+        </MagicSystem>
+        <Geography>
+            <Continents>
+                <Continent name="中央大陆">
+                    <Description>故事主要发生的大陆</Description>
+                </Continent>
+            </Continents>
+        </Geography>
+    </World>
+</Settings>

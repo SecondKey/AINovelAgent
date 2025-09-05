@@ -1,11 +1,16 @@
 ﻿<Application x:Class="AINovelAgent.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:AINovelAgent"
-             StartupUri="MainWindow.xaml">
+             xmlns:local="clr-namespace:AINovelAgent">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <!-- HandyControl主题资源 -->
+                <ResourceDictionary Source="pack://application:,,,/HandyControl;component/Themes/SkinDefault.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/HandyControl;component/Themes/Theme.xaml"/>
+                <!-- AvalonDock自定义主题 -->
+                <ResourceDictionary Source="Resources/Styles/AvalonDockTheme.xaml"/>
+                <!-- 项目自定义样式 -->
                 <ResourceDictionary Source="Resources/Styles/BaseStyles.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>

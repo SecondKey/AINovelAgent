@@ -1,0 +1,48 @@
+---
+description: HandyControl控件库使用规范 - 优先使用HandyControl控件，不支持时明确说明
+globs: ["**/*.xaml", "**/*.cs"]
+alwaysApply: true
+---
+
+# HandyControl控件库使用规范
+
+## 核心原则
+- **优先使用HandyControl控件**，确保界面风格统一
+- **明确说明不支持**：HandyControl不支持时必须说明原因并提供替代方案
+- **必须引入命名空间**：`xmlns:hc="https://handyorg.github.io/handycontrol"`
+
+## 控件替换映射
+| 标准控件 | HandyControl控件 | 样式 |
+|---------|-----------------|------|
+| `Button` | `hc:Button` | `Style="{StaticResource ButtonPrimary}"` |
+| `TextBox` | `hc:TextBox` | 支持水印：`hc:InfoElement.Placeholder` |
+| `ComboBox` | `hc:ComboBox` | 现代下拉样式 |
+| `ProgressBar` | `hc:ProgressBar` 或 `hc:CircleProgressBar` | 根据需求选择 |
+| `CheckBox` | `hc:CheckBox` | 统一风格 |
+| `DataGrid` | `hc:DataGrid` | 增强功能 |
+| `TreeView` | `TreeView` + `Style="{StaticResource TreeViewBaseStyle}"` | HC样式 |
+
+## HandyControl不支持的控件
+- **AvalonDock系列**：`DockingManager`等（使用AvalonDock + 自定义主题）
+- **系统控件**：`Menu`、`StatusBar`、`ToolBar`（使用标准控件 + 动态资源）
+- **专业控件**：富文本编辑器等（使用第三方库 + 样式适配）
+
+## 使用规则
+```xml
+<!-- ✅ 正确：优先使用HandyControl -->
+<hc:Button Content="确定" Style="{StaticResource ButtonPrimary}" />
+
+<!-- ❌ 错误：不经说明使用标准控件 -->
+<Button Content="确定" />
+
+<!-- ✅ 正确：不支持时添加说明 -->
+<!-- HandyControl不支持Menu控件，使用标准控件配合动态资源 -->
+<Menu Background="{DynamicResource RegionBrush}">
+</Menu>
+```
+
+## 动态资源使用
+- 背景：`{DynamicResource RegionBrush}`
+- 边框：`{DynamicResource BorderBrush}`
+- 文字：`{DynamicResource PrimaryTextBrush}`
+- 主色：`{DynamicResource PrimaryBrush}`

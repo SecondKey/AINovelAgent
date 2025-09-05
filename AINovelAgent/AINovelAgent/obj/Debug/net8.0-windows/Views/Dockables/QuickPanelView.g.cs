@@ -59,7 +59,7 @@ namespace AINovelAgent.Views.Dockables {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/AINovelAgent;V1.0.0.0;component/views/dockables/quickpanelview.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/AINovelAgent;component/views/dockables/quickpanelview.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\..\Views\Dockables\QuickPanelView.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CreationLog>
+    <Title>创作日志</Title>
+    <Description>记录创作过程中的重要信息</Description>
+    <Sessions>
+        <Session id="1">
+            <Date>2024-01-01</Date>
+            <Time>14:30:00</Time>
+            <Duration>120</Duration>
+            <WordCount>1500</WordCount>
+            <Chapter>第一章</Chapter>
+            <Actions>
+                <Action type="write">创作了开篇场景</Action>
+                <Action type="edit">修改了主角对话</Action>
+                <Action type="ai_assist">AI生成了环境描写</Action>
+            </Actions>
+            <AIFeedback>
+                <Suggestion>建议增加更多细节描写</Suggestion>
+                <Correction>修正了时间线不一致的问题</Correction>
+            </AIFeedback>
+        </Session>
+        <Session id="2">
+            <Date>2024-01-02</Date>
+            <Time>09:15:00</Time>
+            <Duration>90</Duration>
+            <WordCount>1200</WordCount>
+            <Chapter>第一章</Chapter>
+            <Actions>
+                <Action type="write">完成了第一章</Action>
+                <Action type="review">回顾了整体结构</Action>
+            </Actions>
+        </Session>
+    </Sessions>
+</CreationLog>

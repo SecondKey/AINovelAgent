@@ -1,0 +1,18 @@
+# Cursor Agent project-specific rules
+
+- 当需要运行 C#/.NET 控制台程序以进行验证或交互时，优先使用 `puppet`（或 `cursor-integration/scripts/run-puppet.ps1`）而不是 `dotnet run`。
+- 如果终端找不到 `puppet` 命令，请在 Windows 环境下优先尝试运行 `cursor-integration/scripts/run-puppet.ps1`，以确保在未持久化 PATH 的情况下也能调用全局工具。
+- 执行 `puppet` 时，需等待进程退出；读取其标准输出的全部内容。
+- 将 `puppet` 的输出判定逻辑设为：
+  - 逐行保留标准输出；
+  - 末行若为 `success`，则认为执行成功，继续后续任务；
+  - 末行若为 `error`，则认为执行失败，中止并报告；
+  - 进程退出码也作为信号：0=成功，非0=失败；若末行标记与退出码冲突，以退出码为准。
+- 在需要交互输入时，Cursor 应保持会话直到用户输入 `/success` 或 `/error` 以结束；`/clear` 期间的输入需被清空并不计入最终输出。
+- 构建或打包（`dotnet build/pack`）保持默认行为，不替换。
+
+# Windows 兼容性
+- 优先在 PowerShell 终端中执行以下命令之一：
+  - `puppet`
+  - `./cursor-integration/scripts/run-puppet.ps1`
+- 若两者均不可用，请提示用户安装或将 `%USERPROFILE%\.dotnet\tools` 加入 PATH。

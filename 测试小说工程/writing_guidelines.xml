@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WritingGuidelines>
+    <Title>写作指导规则</Title>
+    <Description>测试小说的写作指导规则</Description>
+    <StyleRules>
+        <Rule type="vocabulary">
+            <Description>词汇选择规则</Description>
+            <Examples>
+                <Example>使用积极正面的词汇</Example>
+                <Example>避免过于复杂的术语</Example>
+            </Examples>
+        </Rule>
+        <Rule type="sentence_structure">
+            <Description>句式结构规则</Description>
+            <Examples>
+                <Example>短句与长句交替使用</Example>
+                <Example>避免过长的复合句</Example>
+            </Examples>
+        </Rule>
+    </StyleRules>
+    <CharacterRules>
+        <Rule type="dialogue">
+            <Description>对话规则</Description>
+            <Examples>
+                <Example>每个角色有独特的说话方式</Example>
+                <Example>对话要符合角色性格</Example>
+            </Examples>
+        </Rule>
+    </CharacterRules>
+    <PlotRules>
+        <Rule type="pacing">
+            <Description>节奏控制规则</Description>
+            <Examples>
+                <Example>紧张情节后要有缓和</Example>
+                <Example>重要转折点要提前铺垫</Example>
+            </Examples>
+        </Rule>
+    </PlotRules>
+</WritingGuidelines>

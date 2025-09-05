@@ -58,7 +58,7 @@ namespace AINovelAgent.Views.Dockables {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/AINovelAgent;V1.0.0.0;component/views/dockables/sampledocumentview.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/AINovelAgent;component/views/dockables/sampledocumentview.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\..\Views\Dockables\SampleDocumentView.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

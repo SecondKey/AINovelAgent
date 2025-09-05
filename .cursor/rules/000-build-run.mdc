@@ -1,0 +1,48 @@
+
+---
+description: 在需要构建/运行/验证（build/run/launch/verify）的场景，采用“按需分级流程”：默认仅构建；当用户明确需要验证时，顺序执行 run→puppet，并以 puppet result 为最终判定依据。
+globs:
+alwaysApply: true
+---
+
+构建阶段（默认门槛）：
+- 默认仅执行构建以验证语法与依赖是否正确：
+  - dotnet build .\AINovelAgent\AINovelAgent.sln -c Debug
+- 构建失败则立即修复；构建成功视为“基础检查通过”。
+
+流程选择逻辑：
+- 若用户未明确要求“验证功能/行为/运行时正确性”，仅执行“构建阶段”。
+- 仅当用户明确需要验证时，进入“运行与验证阶段”。
+
+运行与验证阶段（顺序执行）：
+1) 运行：
+   - dotnet run
+   - 判定：仅依据进程退出码。非 0 视为失败并优先修复；0 视为通过进入下一步。
+   - 要求：不主动结束进程。若为交互/长时间运行程序，应在完成必要检查后由用户自然退出以产生退出码。
+2) 验证（最终判定入口）：
+   - powershell -ExecutionPolicy Bypass -File puppet-release/run-puppet.ps1 | Out-String
+
+验证与判定要求：
+- 最终“是否正确”仅以 Puppet 脚本输出中的 result 段为判定依据。
+- 不得仅依赖 dotnet run（即使退出码为 0 也不单独视为通过）。
+- 如需传参/自定义运行方式，必须先修改 Puppet 脚本，不得临时绕过本约束。
+
+适用范围：
+- 所有“运行/验证/启动/例行检查”相关操作，包括手动与自动流程。
+- 本规则优先级最高，覆盖其它运行相关规则/建议。
+
+禁止情形（示例性，不穷举）：
+- 仅执行 `dotnet run` 即认定验证通过。
+- 跳过执行 `puppet-release/run-puppet.ps1`。
+- 在脚本、文档或自动化中以 `dotnet run` 的结果作为最终正确性判定。
+- 可使用 `dotnet watch` 进行本地调试，但不得作为最终判定依据或替代 Puppet 步骤。
+- 将 build/run/puppet 的输出通过管道传给 `cat`/`Get-Content` 等文件读取命令作为“显示器”。
+
+说明：
+- 该规则约束的是助手与自动化流程的执行习惯；终端不会被自动拦截命令，请自觉遵循上述“按需分级流程”。
+- PowerShell 环境中若需直接显示输出，建议：
+  - 直接调用构建与运行：`dotnet build ...` / `dotnet run ...`；
+  - 直接调用 Puppet：`powershell -ExecutionPolicy Bypass -File puppet-release/run-puppet.ps1 | Out-String`；
+  - 显示到控制台：在脚本中使用 `Write-Output`/`Out-Host`；
+  - 需要保存与查看：使用 `Tee-Object -FilePath out.log`，随后 `Get-Content out.log`；
+  - 避免使用 `| cat`/`| Get-Content` 将脚本对象作为管道输入，以免触发参数绑定错误。

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Outline>
+    <Title>测试小说大纲</Title>
+    <Description>这是一个测试小说的大纲结构</Description>
+    <Chapters>
+        <Chapter number="1" title="开始">
+            <Description>故事开始，介绍主角和背景</Description>
+            <WordCount>5000</WordCount>
+            <Status>未开始</Status>
+        </Chapter>
+        <Chapter number="2" title="发展">
+            <Description>情节发展，遇到第一个挑战</Description>
+            <WordCount>5000</WordCount>
+            <Status>未开始</Status>
+        </Chapter>
+        <Chapter number="3" title="高潮">
+            <Description>故事高潮，主要冲突</Description>
+            <WordCount>5000</WordCount>
+            <Status>未开始</Status>
+        </Chapter>
+        <Chapter number="4" title="结局">
+            <Description>故事结局，问题解决</Description>
+            <WordCount>5000</WordCount>
+            <Status>未开始</Status>
+        </Chapter>
+    </Chapters>
+</Outline>

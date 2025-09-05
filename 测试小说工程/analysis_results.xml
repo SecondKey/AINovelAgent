@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AnalysisResults>
+    <Title>AI分析结果</Title>
+    <Description>测试小说的AI分析结果</Description>
+    <StyleAnalysis>
+        <VocabularyComplexity>中等</VocabularyComplexity>
+        <SentenceLength>适中</SentenceLength>
+        <EmotionalTone>积极</EmotionalTone>
+        <NarrativeStyle>第三人称全知</NarrativeStyle>
+    </StyleAnalysis>
+    <StructureAnalysis>
+        <ChapterBalance>良好</ChapterBalance>
+        <PlotPacing>适中</PlotPacing>
+        <CharacterDevelopment>充分</CharacterDevelopment>
+        <ConflictResolution>合理</ConflictResolution>
+    </StructureAnalysis>
+    <QualityMetrics>
+        <ReadabilityScore>85</ReadabilityScore>
+        <ConsistencyScore>90</ConsistencyScore>
+        <EngagementScore>88</EngagementScore>
+        <OverallScore>87</OverallScore>
+    </QualityMetrics>
+    <Recommendations>
+        <Recommendation priority="high">
+            <Title>增加环境描写</Title>
+            <Description>建议在对话场景中增加更多环境描写</Description>
+        </Recommendation>
+        <Recommendation priority="medium">
+            <Title>优化角色对话</Title>
+            <Description>部分角色的对话可以更加个性化</Description>
+        </Recommendation>
+    </Recommendations>
+</AnalysisResults>

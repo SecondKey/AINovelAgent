@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Timeline>
+    <Title>故事时间线</Title>
+    <Description>记录故事中重要事件的时间顺序</Description>
+    <Events>
+        <Event id="1" date="2024-01-01" time="09:00">
+            <Title>故事开始</Title>
+            <Description>主角开始冒险</Description>
+            <Location>起始村庄</Location>
+            <Characters>主角</Characters>
+        </Event>
+        <Event id="2" date="2024-01-02" time="14:00">
+            <Title>遇到第一个挑战</Title>
+            <Description>主角遇到第一个敌人</Description>
+            <Location>森林</Location>
+            <Characters>主角, 敌人</Characters>
+        </Event>
+    </Events>
+</Timeline>

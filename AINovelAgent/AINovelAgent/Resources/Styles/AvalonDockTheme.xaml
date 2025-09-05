@@ -1,0 +1,14 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:ad="clr-namespace:AvalonDock;assembly=AvalonDock">
+
+    <!-- ===== 使用HandyControl的动态资源实现风格统一 ===== -->
+    
+    <!-- DockingManager主要样式 - 与HandyControl保持一致 -->
+    <Style TargetType="{x:Type ad:DockingManager}">
+        <Setter Property="Background" Value="{DynamicResource RegionBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}"/>
+        <Setter Property="BorderThickness" Value="0"/>
+    </Style>
+
+</ResourceDictionary>

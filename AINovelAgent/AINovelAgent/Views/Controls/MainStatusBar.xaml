@@ -1,21 +1,37 @@
 <UserControl x:Class="AINovelAgent.Views.Controls.MainStatusBar"
-			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-			 mc:Ignorable="d">
-	<StatusBar>
+		 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+		 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+		 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		 xmlns:hc="https://handyorg.github.io/handycontrol"
+		 mc:Ignorable="d">
+	<StatusBar Background="{DynamicResource RegionBrush}" BorderBrush="{DynamicResource BorderBrush}">
 		<StatusBarItem>
-			<TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=StatusText}" />
+			<TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=StatusText}" 
+					   Foreground="{DynamicResource PrimaryTextBrush}"
+					   Margin="8,0" />
 		</StatusBarItem>
+		<Separator />
 		<StatusBarItem>
-			<ProgressBar Width="120" Height="16" Minimum="0" Maximum="100" IsIndeterminate="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=IsProgressIndeterminate}" Value="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=ProgressValue}" />
+			<ProgressBar Width="120" Height="16" 
+						 Minimum="0" Maximum="100" 
+						 IsIndeterminate="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=IsProgressIndeterminate}" 
+						 Value="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=ProgressValue}"
+						 Margin="8,0" />
 		</StatusBarItem>
+		<Separator />
 		<StatusBarItem>
-			<TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=SystemStatusText}" />
+			<StackPanel Orientation="Horizontal" Margin="8,0">
+				<Ellipse Width="8" Height="8" Fill="{DynamicResource SuccessBrush}" Margin="0,0,6,0" VerticalAlignment="Center" />
+				<TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=SystemStatusText}" 
+						   Foreground="{DynamicResource PrimaryTextBrush}"
+						   VerticalAlignment="Center" />
+			</StackPanel>
 		</StatusBarItem>
 		<StatusBarItem HorizontalAlignment="Right">
-			<TextBlock Text="里程碑 1-1" />
+			<hc:Badge Text="1.1" Status="Processing" Margin="8,0">
+				<TextBlock Text="里程碑" Foreground="{DynamicResource PrimaryTextBrush}" />
+			</hc:Badge>
 		</StatusBarItem>
 	</StatusBar>
 </UserControl>

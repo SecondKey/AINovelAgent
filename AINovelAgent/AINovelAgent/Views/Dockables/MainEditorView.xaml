@@ -4,52 +4,82 @@
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:local="clr-namespace:AINovelAgent.Base"
+			 xmlns:vm="clr-namespace:AINovelAgent.ViewModels"
 			 mc:Ignorable="d"
-			 Title="编辑器" ContentId="Document.Editor">
+			 Title="编辑器" ContentId="Document.Editor"
+>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <ToolBar KeyboardNavigation.IsTabStop="False">
-            <ComboBox Width="140" SelectedIndex="0" KeyboardNavigation.IsTabStop="False">
-                <ComboBoxItem Content="Consolas" />
-                <ComboBoxItem Content="Segoe UI" />
-                <ComboBoxItem Content="Microsoft YaHei" />
-            </ComboBox>
-            <ComboBox Width="60" SelectedIndex="2" KeyboardNavigation.IsTabStop="False">
-                <ComboBoxItem Content="10" />
-                <ComboBoxItem Content="12" />
-                <ComboBoxItem Content="14" />
-                <ComboBoxItem Content="16" />
-                <ComboBoxItem Content="18" />
-            </ComboBox>
+            <ComboBox ItemsSource="{Binding AvailableFonts}" 
+                      SelectedItem="{Binding SelectedFontFamily}" 
+                      Width="140" 
+                      SelectionChanged="FontFamilyComboBox_SelectionChanged" 
+                      KeyboardNavigation.IsTabStop="False" />
+            <ComboBox ItemsSource="{Binding FontSizes}" 
+                      SelectedItem="{Binding SelectedFontSize}" 
+                      Width="60" 
+                      SelectionChanged="FontSizeComboBox_SelectionChanged" 
+                      KeyboardNavigation.IsTabStop="False" />
             <Separator />
-            <ToggleButton Content="B" FontWeight="Bold" Width="28" KeyboardNavigation.IsTabStop="False" />
-            <ToggleButton Content="I" FontStyle="Italic" Width="28" KeyboardNavigation.IsTabStop="False" />
-            <ToggleButton Width="28" KeyboardNavigation.IsTabStop="False">
+            <ToggleButton Content="B" FontWeight="Bold" Width="28" 
+                          IsChecked="{Binding IsBold}" 
+                          Command="{Binding ToggleBoldCommand}" 
+                          KeyboardNavigation.IsTabStop="False" />
+            <ToggleButton Content="I" FontStyle="Italic" Width="28" 
+                          IsChecked="{Binding IsItalic}" 
+                          Command="{Binding ToggleItalicCommand}" 
+                          KeyboardNavigation.IsTabStop="False" />
+            <ToggleButton Width="28" 
+                          IsChecked="{Binding IsUnderline}" 
+                          Command="{Binding ToggleUnderlineCommand}" 
+                          KeyboardNavigation.IsTabStop="False">
                 <TextBlock Text="U" TextDecorations="Underline" />
             </ToggleButton>
             <Separator />
-            <Button Content="撤销" KeyboardNavigation.IsTabStop="False" />
-            <Button Content="重做" KeyboardNavigation.IsTabStop="False" />
+            <Button Content="高亮" Command="{Binding ApplyHighlightCommand}" KeyboardNavigation.IsTabStop="False" />
+            <Button Content="背景" Command="{Binding ApplyBackgroundColorCommand}" KeyboardNavigation.IsTabStop="False" />
             <Separator />
-            <Button Content="左对齐" KeyboardNavigation.IsTabStop="False" />
-            <Button Content="居中" KeyboardNavigation.IsTabStop="False" />
-            <Button Content="右对齐" KeyboardNavigation.IsTabStop="False" />
+            <ComboBox ItemsSource="{Binding LineSpacings}" 
+                      SelectedItem="{Binding SelectedLineSpacing}" 
+                      Width="80" 
+                      SelectionChanged="LineSpacingComboBox_SelectionChanged" 
+                      KeyboardNavigation.IsTabStop="False" />
+            <ComboBox ItemsSource="{Binding CharacterSpacings}" 
+                      SelectedItem="{Binding SelectedCharacterSpacing}" 
+                      Width="80" 
+                      SelectionChanged="CharacterSpacingComboBox_SelectionChanged" 
+                      KeyboardNavigation.IsTabStop="False" />
+            <Separator />
+            <Button Content="撤销" Command="ApplicationCommands.Undo" KeyboardNavigation.IsTabStop="False" />
+            <Button Content="重做" Command="ApplicationCommands.Redo" KeyboardNavigation.IsTabStop="False" />
+            <Separator />
+            <Button Content="查找" Command="{Binding FindTextCommand}" KeyboardNavigation.IsTabStop="False" />
+            <Button Content="替换" Command="{Binding ReplaceTextCommand}" KeyboardNavigation.IsTabStop="False" />
+            <Separator />
+            <Button Content="保存" Command="{Binding SaveDocumentCommand}" KeyboardNavigation.IsTabStop="False" />
+            <Button Content="加载" Command="{Binding LoadDocumentCommand}" KeyboardNavigation.IsTabStop="False" />
         </ToolBar>
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <!-- 编辑区域：仅文本框 -->
-            <TextBox Grid.Row="0" Name="EditorBox" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" TextWrapping="Wrap"
-                        FontFamily="Consolas" FontSize="14" TextChanged="EditorBox_TextChanged" SelectionChanged="EditorBox_SelectionChanged" PreviewKeyDown="EditorBox_PreviewKeyDown" />
+            <!-- 编辑区域：WPF RichTextBox富文本编辑器 -->
+            <RichTextBox Grid.Row="0" Name="EditorBox" 
+                         FontFamily="Microsoft YaHei" 
+                         FontSize="14" 
+                         VerticalScrollBarVisibility="Auto"
+                         HorizontalScrollBarVisibility="Auto"
+                         SelectionChanged="EditorBox_SelectionChanged" 
+                         TextChanged="EditorBox_TextChanged" />
             <!-- 本地状态栏：左下角显示行列号 -->
             <StatusBar Grid.Row="1">
                 <StatusBarItem>
-                    <TextBlock Name="EditorStatusTextBlock" Text="行 1, 列 1" />
+                    <TextBlock Text="{Binding StatusText}" />
                 </StatusBarItem>
             </StatusBar>
         </Grid>

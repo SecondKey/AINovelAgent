@@ -1,15 +1,45 @@
 <UserControl x:Class="AINovelAgent.Views.Dockables.Panels.ProjectNavigationPanel"
-			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-			 mc:Ignorable="d">
+		 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+		 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+		 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		 xmlns:converters="clr-namespace:AINovelAgent.Converters"
+		 xmlns:hc="https://handyorg.github.io/handycontrol"
+		 mc:Ignorable="d">
+	<UserControl.Resources>
+		<BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+		<converters:InverseBooleanToVisibilityConverter x:Key="InverseBooleanToVisibilityConverter" />
+	</UserControl.Resources>
 	<Grid>
-		<TreeView>
-			<TreeViewItem Header="项目" IsExpanded="True">
-				<TreeViewItem Header="文件夹A" />
-				<TreeViewItem Header="文件夹B" />
-			</TreeViewItem>
+		<TreeView ItemsSource="{Binding RootItems}" Style="{StaticResource TreeViewBaseStyle}">
+			<TreeView.ItemTemplate>
+				<HierarchicalDataTemplate ItemsSource="{Binding Children}">
+					<StackPanel Orientation="Horizontal" Margin="2">
+						<TextBlock Text="📁" Margin="0,0,4,0" 
+								   Visibility="{Binding IsDirectory, Converter={StaticResource ResourceKey=BooleanToVisibilityConverter}}" />
+						<TextBlock Text="📄" Margin="0,0,4,0" 
+								   Visibility="{Binding IsDirectory, Converter={StaticResource ResourceKey=InverseBooleanToVisibilityConverter}}" />
+						<TextBlock Text="{Binding Name}" 
+								   VerticalAlignment="Center"
+								   Foreground="{DynamicResource PrimaryTextBrush}" />
+					</StackPanel>
+				</HierarchicalDataTemplate>
+			</TreeView.ItemTemplate>
+			<TreeView.ItemContainerStyle>
+				<Style TargetType="TreeViewItem" BasedOn="{StaticResource TreeViewItemBaseStyle}">
+					<Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}" />
+					<Setter Property="Padding" Value="4,2" />
+					<Style.Triggers>
+						<Trigger Property="IsMouseOver" Value="True">
+							<Setter Property="Background" Value="{DynamicResource SecondaryRegionBrush}" />
+						</Trigger>
+						<Trigger Property="IsSelected" Value="True">
+							<Setter Property="Background" Value="{DynamicResource PrimaryBrush}" />
+							<Setter Property="Foreground" Value="{DynamicResource TextIconBrush}" />
+						</Trigger>
+					</Style.Triggers>
+				</Style>
+			</TreeView.ItemContainerStyle>
 		</TreeView>
 	</Grid>
 </UserControl>
